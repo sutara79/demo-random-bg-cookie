@@ -3,36 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<script src="http://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
-<script>
-$(function () {
-  // 背景用のCSSを収めた配列
-  var arr_bg = [
-    'body-red',
-    'body-blue',
-    'body-green',
-    'body-yellow',
-    'body-purple'
-  ];
-
-  // クッキーを取得
-  var num_current = Cookies.get('bg');
-  var num_new;
-
-  if (num_current === undefined) {
-    // クッキーがない場合は、初期値を設定
-    num_new = 0;
-  } else {
-    // クッキーがある場合は、現在の値以外の中からランダムに選ぶ
-    var class_current = arr_bg[num_current];
-    arr_bg.splice(num_current, 1);
-    num_new = Math.floor(Math.random() * arr_bg.length);
-  }
-  $('body').addClass(arr_bg[num_new]);
-  Cookies.set('bg', num_new, {expires: 30});
-});
-</script>
 <title>クッキーを使って前回と重複させずにランダムに背景色を変更する</title>
 <style>
 .body-red {
@@ -51,6 +21,40 @@ $(function () {
   background-color: purple;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.2/js.cookie.min.js"></script>
+<script>
+$(function () {
+  // 背景用のCSSを収めた配列
+  var arr_class = [
+    'body-red',
+    'body-blue',
+    'body-green',
+    'body-yellow',
+    'body-purple'
+  ];
+  // クッキーを取得
+  var num_current = Cookies.get('num_current');
+  var num_new;
+
+  if (num_current === undefined) {
+    // クッキーがない場合は、初期値を設定
+    num_new = 0;
+  } else {
+    // クッキーがある場合は、現在の値以外の中からランダムに選ぶ
+    var arr_num = [];
+    for (var i = 0; i < arr_class.length; i++) {
+      arr_num.push(i);
+    }
+    arr_num.splice(num_current, 1);
+    num_new = arr_num[
+      Math.floor(Math.random() * arr_num.length)
+    ];
+  }
+  $('body').addClass(arr_class[num_new]);
+  Cookies.set('num_current', num_new, {expires: 30});
+});
+</script>
 </head>
 <body>
 <h1>クッキーを使って前回と重複させずにランダムに背景色を変更する</h1>
