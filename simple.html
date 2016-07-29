@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>クッキーを使わず、単純な方法でランダムに背景色を変更する</title>
+<style>
+.body-red {
+  background-color: red;
+}
+.body-blue {
+  background-color: blue;
+}
+.body-green {
+  background-color: green;
+}
+.body-yellow {
+  background-color: yellow;
+}
+.body-purple {
+  background-color: purple;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script>
+$(function () {
+  // 背景用のCSSを収めた配列
+  var arr_class = [
+    'body-red',
+    'body-blue',
+    'body-green',
+    'body-yellow',
+    'body-purple'
+  ];
+  $('body').addClass(arr_class[
+    Math.floor(Math.random() * arr_class.length)
+  ]);
+});
+</script>
+</head>
+<body>
+<h1>クッキーを使わず、単純な方法でランダムに背景色を変更する</h1>
+<p>
+  ページを再読み込みするたびに&lt;body&gt;のクラスが切り替わります。<br>
+  前回と重複する場合もあります。
+</p>
+</body>
+</html>
